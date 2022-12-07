@@ -48,4 +48,15 @@ public class NewsValidationDefinitions {
       String results = googleSearchActions.googleSearchLocators.resultStats.getText();
       Assert.assertTrue(googleSearchActions.googleResultsAmount(results) > amount);
     }
+
+    @When("user searches the first article in Fact Check")
+    public void userSearchesTheFirstArticleInFactCheck() {
+
+    }
+
+
+    @Then("results do not contain Publisher rating False")
+    public void resultsDoNotContainPublisherRatingFalse() {
+
+    }
 }
