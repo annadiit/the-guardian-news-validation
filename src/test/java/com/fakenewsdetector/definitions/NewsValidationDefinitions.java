@@ -1,5 +1,6 @@
 package com.fakenewsdetector.definitions;
 
+import com.fakenewsdetector.actions.FactCheckSearchActions;
 import com.fakenewsdetector.actions.GoogleSearchActions;
 import com.fakenewsdetector.actions.NewsFeedActions;
 import com.fakenewsdetector.helper.HelperClass;
@@ -15,9 +16,11 @@ import org.openqa.selenium.WebElement;
 public class NewsValidationDefinitions {
 
     private static final String GOOGLE_URL_PREFIX = "https://www.google.com/search?q=";
+    private static final String FACT_CHECK_URL_PREFIX = "https://toolbox.google.com/factcheck/explorer/search/";
 
     NewsFeedActions newsFeedActions = new NewsFeedActions();
     GoogleSearchActions googleSearchActions = new GoogleSearchActions();
+    FactCheckSearchActions factCheckSearchActions = new FactCheckSearchActions();
 
     @Given("User is on {string}")
     public void goToNewsFeed(String url){
@@ -51,12 +54,14 @@ public class NewsValidationDefinitions {
 
     @When("user searches the first article in Fact Check")
     public void userSearchesTheFirstArticleInFactCheck() {
-
+        String currentTitle = newsFeedActions.newsFeedLocators.firstArticle.getAttribute("innerHTML");
+        HelperClass.openPage(FACT_CHECK_URL_PREFIX + currentTitle);
     }
-
 
     @Then("results do not contain Publisher rating False")
     public void resultsDoNotContainPublisherRatingFalse() {
-
+        String resultDidntMatchAnyClaims = "did not match any claims.";
+        String noResultsText = factCheckSearchActions.factCheckSearchLocators.noResultsText.getText();
+        Assert.assertTrue(noResultsText.contains(resultDidntMatchAnyClaims));
     }
 }
