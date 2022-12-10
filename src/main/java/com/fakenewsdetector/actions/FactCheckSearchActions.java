@@ -18,5 +18,8 @@ public class FactCheckSearchActions {
         factCheckSearchLocators.searchButton.click();
     }
 
-
+    public String factCheckSearchResultsRating(){
+      String rating = factCheckSearchLocators.ratingLabel.getAttribute("outerText");
+      return rating;
+    }
 }

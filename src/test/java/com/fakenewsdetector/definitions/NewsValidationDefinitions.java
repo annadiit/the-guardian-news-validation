@@ -58,10 +58,23 @@ public class NewsValidationDefinitions {
         HelperClass.openPage(FACT_CHECK_URL_PREFIX + currentTitle);
     }
 
-    @Then("results do not contain Publisher rating False")
+    @Then("results contain 0 claims")
     public void resultsDoNotContainPublisherRatingFalse() {
         String resultDidntMatchAnyClaims = "did not match any claims.";
         String noResultsText = factCheckSearchActions.factCheckSearchLocators.noResultsText.getText();
+        //checking there is 0 claims
         Assert.assertTrue(noResultsText.contains(resultDidntMatchAnyClaims));
+    }
+
+    @When("User searches the fake article titled {string} on Fact Check source")
+    public void userSearchesTheFakeArticleTitledOnFactCheckSource(String fakeArticleTitle) {
+        HelperClass.openPage(FACT_CHECK_URL_PREFIX + fakeArticleTitle);
+    }
+
+    @Then("results contain Publisher rating not True")
+    public void resultsContainPublisherRatingNotTrue() {
+        String rating = factCheckSearchActions.factCheckSearchResultsRating();
+        // For test verification it has been assumed rating for confirmed facts contains "True". example: "True", "Mostly True"
+        Assert.assertFalse(rating.contains("True"));
     }
 }

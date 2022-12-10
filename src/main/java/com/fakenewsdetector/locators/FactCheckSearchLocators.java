@@ -13,4 +13,7 @@ public class FactCheckSearchLocators {
 
     @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/search-results-page/div/div[6]/div/div/p[1]")
     public WebElement noResultsText;
+
+    @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/search-results-page/div/div[6]/fc-results-list/ul[1]/mat-card/div[3]/div[3]/div/span/span[1]")
+    public WebElement ratingLabel;
 }

@@ -9,14 +9,22 @@ Feature: Validate the first article on the Guardian news feed
     When user searches the first article in Google
     Then more than 1000 sources are displayed
 
-  Scenario: Article title yields in valid sources
-
-
   Scenario: Article title has 0 claims in google Fact Check
     Given User is on "https://www.theguardian.com/tone/news/"
     And user clicks on "I am Happy" button
     When user searches the first article in Fact Check
-    Then results do not contain Publisher rating False
+    Then results contain 0 claims
 
+  Scenario: The fake article yields on Fact Check with rating False
+    When User searches the fake article titled "Fluctuating Georgia U.S. Senate runoff vote count is evidence of election fraud." on Fact Check source
+    Then results contain Publisher rating not True
+
+#  Scenario: Article title yields in valid sources
+#    Given User is on "https://www.theguardian.com/tone/news/"
+#    And user clicks on "I am Happy" button
+#    When user searches the first article in BBC resources
+
+
+#  Scenario: Title does not yield on satire sources
 
 
