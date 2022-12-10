@@ -13,6 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.HashSet;
+import java.util.List;
+
 public class NewsValidationDefinitions {
 
     private static final String GOOGLE_URL_PREFIX = "https://www.google.com/search?q=";
@@ -22,9 +25,17 @@ public class NewsValidationDefinitions {
     GoogleSearchActions googleSearchActions = new GoogleSearchActions();
     FactCheckSearchActions factCheckSearchActions = new FactCheckSearchActions();
 
+    public HashSet<String> validSources = new HashSet<String>();
+
     @Given("User is on {string}")
     public void goToNewsFeed(String url){
         HelperClass.openPage(url);
+        validSources.add("https://www.bbc.co.uk");
+        validSources.add("https://www.forbes.com");
+        validSources.add("https://www.wsj.com");
+        validSources.add("https://www.independent.co.uk");
+        validSources.add("https://www.standard.co.uk");
+        validSources.add("https://www.telegraph.co.uk");
     }
 
     private void clickIAmHappy() {
@@ -74,7 +85,25 @@ public class NewsValidationDefinitions {
     @Then("results contain Publisher rating not True")
     public void resultsContainPublisherRatingNotTrue() {
         String rating = factCheckSearchActions.factCheckSearchResultsRating();
-        // For test verification it has been assumed rating for confirmed facts contains "True". example: "True", "Mostly True"
+        // For test verification it's assumed confirmed facts are rated as "True". example: "True", "Mostly True"
         Assert.assertFalse(rating.contains("True"));
     }
+
+    @Then("results contain trusted sources")
+    public void resultsContainTrustedSources() {
+
+        int count = 0;
+        for(int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++){
+
+            String resultsURL = googleSearchActions.googleSearchLocators.results.get(i).getAttribute("innerText").split(" ")[0];
+            if(validSources.contains(resultsURL)){
+                count++;
+            }
+        }
+
+        Assert.assertTrue("Valid Source has not found", count > 0);
+
+    }
 }
+
+
