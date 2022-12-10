@@ -2,7 +2,6 @@ package com.fakenewsdetector.actions;
 
 import com.fakenewsdetector.helper.HelperClass;
 import com.fakenewsdetector.locators.FactCheckSearchLocators;
-import com.fakenewsdetector.locators.GoogleSearchLocators;
 import org.openqa.selenium.support.PageFactory;
 
 public class FactCheckSearchActions {
@@ -19,7 +18,6 @@ public class FactCheckSearchActions {
     }
 
     public String factCheckSearchResultsRating(){
-      String rating = factCheckSearchLocators.ratingLabel.getAttribute("outerText");
-      return rating;
+        return factCheckSearchLocators.ratingLabel.getAttribute("outerText");
     }
 }

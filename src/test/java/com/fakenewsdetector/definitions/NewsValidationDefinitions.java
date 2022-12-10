@@ -12,9 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.HashSet;
-import java.util.List;
 
 public class NewsValidationDefinitions {
 
@@ -25,17 +23,27 @@ public class NewsValidationDefinitions {
     GoogleSearchActions googleSearchActions = new GoogleSearchActions();
     FactCheckSearchActions factCheckSearchActions = new FactCheckSearchActions();
 
-    public HashSet<String> validSources = new HashSet<String>();
+    public HashSet<String> validSources = new HashSet<>();
+    public HashSet<String> satireSources = new HashSet<>();
 
     @Given("User is on {string}")
-    public void goToNewsFeed(String url){
+    public void goToNewsFeed(String url) {
         HelperClass.openPage(url);
+
         validSources.add("https://www.bbc.co.uk");
         validSources.add("https://www.forbes.com");
+        validSources.add("https://www.reuters.com");
         validSources.add("https://www.wsj.com");
         validSources.add("https://www.independent.co.uk");
         validSources.add("https://www.standard.co.uk");
         validSources.add("https://www.telegraph.co.uk");
+
+        satireSources.add("https://www.thedailymash.co.uk");
+        satireSources.add("https://www.theonion.com");
+        satireSources.add("https://www.dailysquib.co.uk");
+        satireSources.add("https://thedailywtf.com");
+        satireSources.add("https://thelemonpress.co.uk");
+        satireSources.add("https://www.newsbiscuit.com");
     }
 
     private void clickIAmHappy() {
@@ -59,8 +67,8 @@ public class NewsValidationDefinitions {
 
     @Then("more than {int} sources are displayed")
     public void moreThanSourcesAreDisplayed(int amount) {
-      String results = googleSearchActions.googleSearchLocators.resultStats.getText();
-      Assert.assertTrue(googleSearchActions.googleResultsAmount(results) > amount);
+        String results = googleSearchActions.googleSearchLocators.resultStats.getText();
+        Assert.assertTrue(googleSearchActions.googleResultsAmount(results) > amount);
     }
 
     @When("user searches the first article in Fact Check")
@@ -93,17 +101,33 @@ public class NewsValidationDefinitions {
     public void resultsContainTrustedSources() {
 
         int count = 0;
-        for(int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++){
+        for (int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++) {
 
             String resultsURL = googleSearchActions.googleSearchLocators.results.get(i).getAttribute("innerText").split(" ")[0];
-            if(validSources.contains(resultsURL)){
+            if (validSources.contains(resultsURL)) {
                 count++;
             }
         }
-
         Assert.assertTrue("Valid Source has not found", count > 0);
 
     }
+
+
+    @Then("results do not contain satire sources")
+    public void resultsDoNotContainSatireSources() {
+
+        int count = 0;
+        for (int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++) {
+
+            String resultsURL = googleSearchActions.googleSearchLocators.results.get(i).getAttribute("innerText").split(" ")[0];
+            if (satireSources.contains(resultsURL)) {
+                count++;
+            }
+        }
+        Assert.assertFalse("Satire sources are found for this article", count > 0);
+
+    }
 }
+
 
 

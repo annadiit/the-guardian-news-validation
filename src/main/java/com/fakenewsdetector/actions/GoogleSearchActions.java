@@ -2,14 +2,7 @@ package com.fakenewsdetector.actions;
 
 import com.fakenewsdetector.helper.HelperClass;
 import com.fakenewsdetector.locators.GoogleSearchLocators;
-import com.fakenewsdetector.locators.NewsFeedLocators;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.HashSet;
-import java.util.List;
-
 
 public class GoogleSearchActions {
 
