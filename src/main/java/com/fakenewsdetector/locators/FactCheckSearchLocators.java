@@ -8,7 +8,6 @@ import java.util.List;
 
 public class FactCheckSearchLocators {
 
-
     @FindBy(className = "no-results-text")
     public WebElement noResultsText;
 

@@ -9,9 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +20,6 @@ public class NewsValidationDefinitions {
     NewsFeedActions newsFeedActions = new NewsFeedActions();
     GoogleSearchActions googleSearchActions = new GoogleSearchActions();
     FactCheckSearchActions factCheckSearchActions = new FactCheckSearchActions();
-
 
     public HashSet<String> validSources = new HashSet<>();
     public HashSet<String> satireSources = new HashSet<>();
@@ -47,7 +43,6 @@ public class NewsValidationDefinitions {
         satireSources.add("https://thelemonpress.co.uk");
         satireSources.add("https://www.newsbiscuit.com");
     }
-
 
     @When("user searches the first article in Google")
     public void userSearchesArticleIn() {
@@ -81,11 +76,13 @@ public class NewsValidationDefinitions {
         HelperClass.openPage(FACT_CHECK_URL_PREFIX + fakeArticleTitle);
     }
 
-
     @Then("results contain Publisher rating not True")
     public void resultsContainPublisherRatingNotTrue() {
         String rating = factCheckSearchActions.factCheckSearchResultsRating();
-        // For test verification it's assumed confirmed facts are rated as "True". example: "True", "Mostly True"
+        // For this task it's assumed:
+        // - confirmed facts are rated as "True", "Mostly True"
+        // - unconfirmed (aka Fake) facts are rated as "False", "No Evidence"
+
         Assert.assertFalse(rating.contains("True"));
     }
 
