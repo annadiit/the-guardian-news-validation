@@ -4,7 +4,6 @@ import com.fakenewsdetector.actions.FactCheckSearchActions;
 import com.fakenewsdetector.actions.GoogleSearchActions;
 import com.fakenewsdetector.actions.NewsFeedActions;
 import com.fakenewsdetector.helper.HelperClass;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
