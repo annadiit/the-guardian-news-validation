@@ -13,8 +13,4 @@ public class NewsFeedActions {
         PageFactory.initElements(HelperClass.getDriver(), newsFeedLocators);
     }
 
-    public void clickYesIAmHappyButton(){
-        newsFeedLocators.iAmHappy.click();
-    }
-
 }

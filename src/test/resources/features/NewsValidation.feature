@@ -5,13 +5,11 @@ Feature: Validate the first article on the Guardian news feed
 
   Scenario: Article title yields more than 1M Google results
     Given User is on "https://www.theguardian.com/tone/news/"
-    And user clicks on "I am Happy" button
     When user searches the first article in Google
     Then more than 1000 sources are displayed
 
   Scenario: Article title has 0 claims in google Fact Check
     Given User is on "https://www.theguardian.com/tone/news/"
-    And user clicks on "I am Happy" button
     When user searches the first article in Fact Check
     Then results contain 0 claims
 
@@ -21,13 +19,11 @@ Feature: Validate the first article on the Guardian news feed
 
   Scenario: Article title yields in valid sources
     Given User is on "https://www.theguardian.com/tone/news/"
-    And user clicks on "I am Happy" button
     When user searches the first article in Google
     Then results contain trusted sources
 
   Scenario: Title does not yield on satire sources
     Given User is on "https://www.theguardian.com/tone/news/"
-    And user clicks on "I am Happy" button
     When user searches the first article in Fact Check
     Then results do not contain satire sources
 

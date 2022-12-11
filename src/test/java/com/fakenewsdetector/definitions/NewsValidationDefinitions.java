@@ -48,17 +48,6 @@ public class NewsValidationDefinitions {
         satireSources.add("https://www.newsbiscuit.com");
     }
 
-    private void clickIAmHappy() {
-        WebDriver wd = HelperClass.getDriver();
-        WebElement iframe = wd.findElement(By.xpath("//iframe[@id='sp_message_iframe_744206']"));
-        wd.switchTo().frame(iframe);
-        newsFeedActions.clickYesIAmHappyButton();
-    }
-
-    @And("user clicks on \"I am Happy\" button")
-    public void userClicksOnButton() {
-//        clickIAmHappy();
-    }
 
     @When("user searches the first article in Google")
     public void userSearchesArticleIn() {
