@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.HashSet;
+import java.util.Set;
 
 public class NewsValidationDefinitions {
 
@@ -22,6 +23,7 @@ public class NewsValidationDefinitions {
     NewsFeedActions newsFeedActions = new NewsFeedActions();
     GoogleSearchActions googleSearchActions = new GoogleSearchActions();
     FactCheckSearchActions factCheckSearchActions = new FactCheckSearchActions();
+
 
     public HashSet<String> validSources = new HashSet<>();
     public HashSet<String> satireSources = new HashSet<>();
@@ -97,34 +99,32 @@ public class NewsValidationDefinitions {
         Assert.assertFalse(rating.contains("True"));
     }
 
-    @Then("results contain trusted sources")
-    public void resultsContainTrustedSources() {
+    public Integer countSearchResultsInASet(Set<String> urlsToLookFor){
 
         int count = 0;
         for (int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++) {
 
             String resultsURL = googleSearchActions.googleSearchLocators.results.get(i).getAttribute("innerText").split(" ")[0];
-            if (validSources.contains(resultsURL)) {
+            if (urlsToLookFor.contains(resultsURL)) {
                 count++;
             }
         }
+        return count;
+    }
+
+    @Then("results contain trusted sources")
+    public void resultsContainTrustedSources() {
+
+        int count= countSearchResultsInASet(validSources);
         Assert.assertTrue("Valid Source has not found", count > 0);
 
     }
 
-
     @Then("results do not contain satire sources")
     public void resultsDoNotContainSatireSources() {
 
-        int count = 0;
-        for (int i = 0; i < googleSearchActions.googleSearchLocators.results.size(); i++) {
-
-            String resultsURL = googleSearchActions.googleSearchLocators.results.get(i).getAttribute("innerText").split(" ")[0];
-            if (satireSources.contains(resultsURL)) {
-                count++;
-            }
-        }
-        Assert.assertFalse("Satire sources are found for this article", count > 0);
+        int count= countSearchResultsInASet(satireSources);
+        Assert.assertEquals("Satire sources are found for this article", 0, count);
 
     }
 }

@@ -12,4 +12,6 @@ public class GoogleSearchLocators {
 
     @FindAll(@FindBy(xpath = "//*[@class='yuRUbf']//a/div/cite"))
     public List <WebElement> results;
+
+
 }

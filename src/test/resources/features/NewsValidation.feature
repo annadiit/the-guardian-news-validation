@@ -25,7 +25,6 @@ Feature: Validate the first article on the Guardian news feed
     When user searches the first article in Google
     Then results contain trusted sources
 
-
   Scenario: Title does not yield on satire sources
     Given User is on "https://www.theguardian.com/tone/news/"
     And user clicks on "I am Happy" button
