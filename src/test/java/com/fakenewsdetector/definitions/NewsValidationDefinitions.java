@@ -81,6 +81,7 @@ public class NewsValidationDefinitions {
         HelperClass.openPage(FACT_CHECK_URL_PREFIX + fakeArticleTitle);
     }
 
+
     @Then("results contain Publisher rating not True")
     public void resultsContainPublisherRatingNotTrue() {
         String rating = factCheckSearchActions.factCheckSearchResultsRating();

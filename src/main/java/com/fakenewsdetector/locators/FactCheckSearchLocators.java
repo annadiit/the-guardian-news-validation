@@ -1,19 +1,17 @@
 package com.fakenewsdetector.locators;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class FactCheckSearchLocators {
 
-    @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/fc-landing-page/div/div/fc-search-input/div/form")
-    public WebElement searchField;
 
-    @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/search-results-page/div/fc-search-input/div/form/label/button/span[1]")
-    public WebElement searchButton;
-
-    @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/search-results-page/div/div[6]/div/div/p[1]")
+    @FindBy(className = "no-results-text")
     public WebElement noResultsText;
 
-    @FindBy(xpath = "/html/body/fact-check-tools/div/div[2]/search-results-page/div/div[6]/fc-results-list/ul[1]/mat-card/div[3]/div[3]/div/span/span[1]")
-    public WebElement ratingLabel;
+    @FindAll(@FindBy(xpath = "//*[@title='Publisher rating']"))
+    public List<WebElement> ratingLabel;
 }

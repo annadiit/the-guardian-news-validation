@@ -12,12 +12,8 @@ public class FactCheckSearchActions {
         PageFactory.initElements(HelperClass.getDriver(), factCheckSearchLocators);
     }
 
-    public void factCheckSearchInput(String searchString){
-        factCheckSearchLocators.searchField.sendKeys(searchString);
-        factCheckSearchLocators.searchButton.click();
-    }
 
     public String factCheckSearchResultsRating(){
-        return factCheckSearchLocators.ratingLabel.getAttribute("outerText");
+        return factCheckSearchLocators.ratingLabel.get(0).getAttribute("outerText");
     }
 }
