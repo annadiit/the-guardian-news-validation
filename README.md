@@ -28,5 +28,4 @@ Navigate to your project directory from terminal and run following commands:
 
     maven test
 
-This runs Cucumber features using Cucumber's JUnit Platform Engine. The `Suite`
-annotation on the `RunTests` class tells JUnit to kick off Cucumber.
+This runs Cucumber feature using Cucumber's JUnit Platform Engine.
