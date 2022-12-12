@@ -5,9 +5,7 @@ There is a single feature file with five scenarios. Each scenario has three step
 
 ## Installation
 
-# Pre-requisite:
-
-Install next software on your machine:
+Pre-requisite: Install next software on your machine:
 1. Install JDK 1.8 and set path
 2. Install <a href="https://maven.apache.org/download.cgi" target="_blank">Maven</a> and set path
 3. Install <a href = "https://www.jetbrains.com/idea/download/#section=mac" target="_blank">Intellij</a> (or Eclipse)
@@ -15,9 +13,9 @@ Install next software on your machine:
 5. Download Chrome driver 
 
 
-# Get the code
+## Get the Code
 
-Git:
+Clone repository using Git:
 
     git clone https://github.com/annadiit/the-guardian-news-validation.git
     cd the-guardian-news-validation
