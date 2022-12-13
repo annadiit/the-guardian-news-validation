@@ -3,7 +3,7 @@ Feature: Validate the first article on the Guardian news feed
   I want to browse the first article from the Guardian on other sources
   So I am sure that the news are not fake
 
-  Scenario: Article title yields more than 1M Google results
+  Scenario: Article title yields more than 1K Google results
     Given User is on "https://www.theguardian.com/tone/news/"
     When user searches the first article in Google
     Then more than 1000 sources are displayed
